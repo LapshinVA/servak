@@ -5,10 +5,12 @@ import java.nio.file.Path;
 
 public class Main {
 
+
     public static void main(String[] args) {
         final var server = new Server();
 
-        server.addHandler(MethodName.GET, "/index.html",
+
+        server.addHandler("GET", "/index.html",
                 (request, responseStream) -> {
                     try {
                         final var filePath = Path.of(".", "public", request.getPath());
@@ -20,7 +22,7 @@ public class Main {
                     }
                 });
 
-        server.addHandler(MethodName.POST, "/index.html", (request, responseStream) -> {
+        server.addHandler("POST", "/index.html", (request, responseStream) -> {
             try {
                 final var filePath = Path.of(".", "public", request.getPath());
                 final String mimeType = Files.probeContentType(filePath);
